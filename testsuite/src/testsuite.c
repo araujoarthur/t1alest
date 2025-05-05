@@ -4,8 +4,12 @@
 #include <string.h>
 
 #include "testsuite.h"
-#include "../../include/libgll.h"
+#include "../../dependencies/include/libgll.h"
+#define REPETITIONS 10000
 
+double time_diff(struct timespec start, struct timespec end) {
+   return (end.tv_sec - start.tv_sec) + (end.tv_nsec - start.tv_nsec) / 1e9;
+}
 
 testcontainer_t initTestContainer() {
    testcontainer_t tc;
@@ -112,13 +116,17 @@ double gll_testrunner(ptc_t t) {
       gll_append(&pattern, current_char);
    }
    
+   gll_t result;
    clock_t start = clock();
-   gll_t result = gll_search_all(&text, &pattern);
+   for(int __i = 0; __i < REPETITIONS; __i++) {
+      result = gll_search_all(&text, &pattern);
+   }
    clock_t stop = clock();
+
 
    // comparar resultados.
    if (result.element_count == countOccurences) {
-      printf("#1 PASSED: Quantidade de ocorrencias esperada (%d) está de acordo com a encontrada (%d)\n", countOccurences, result.element_count);
+      //printf("#1 PASSED: Quantidade de ocorrencias esperada (%d) está de acordo com a encontrada (%d)\n", countOccurences, result.element_count);
    }
    else {
       printf("#1 FAILED [GLL]: Quantidade de ocorrencias esperada (%d) NÃO está de acordo com a encontrada (%d)\n", countOccurences, result.element_count);
@@ -143,7 +151,7 @@ double gll_testrunner(ptc_t t) {
       exp_pos = *(((int*) occurencesPositions) + i);
 
       if (fnd_pos == exp_pos) {
-         printf("#2 PASSED [GLL]: Ocorrencia esperada ocorreu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
+         //printf("#2 PASSED [GLL]: Ocorrencia esperada ocorreu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
       } else {
          printf("#2 FAILED [GLL]: Ocorrencia esperada não aconteceu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
          printf("\n ### Finalizado [COM ERRO] Teste ID: %d Com Linked List ### \n",t->testId);
@@ -151,8 +159,8 @@ double gll_testrunner(ptc_t t) {
       }
    }
    printf("\n ### [SUCESSO-GLL] Finalizado Teste ID: %d Com Linked List ### \n",t->testId);
-   tof = (double) stop - start;
-   return tof;
+   tof = (double) (stop - start) / CLOCKS_PER_SEC;
+   return tof/REPETITIONS;
 }
 
 double gal_testrunner(ptc_t t) {
@@ -179,7 +187,10 @@ double gal_testrunner(ptc_t t) {
 
    // Realizar busca
    clock_t start = clock();
-   gal_t result = gal_search_all(&text, &pattern);
+   gal_t result;
+   for(int __i = 0; __i < REPETITIONS; __i ++) {
+      result = gal_search_all(&text, &pattern);
+   }
    clock_t stop = clock();
 
 
@@ -202,7 +213,7 @@ double gal_testrunner(ptc_t t) {
       exp_pos = *(((int*) occurencesPositions) + i);
 
       if (fnd_pos == exp_pos) {
-         printf("#2 PASSED [GAL]: Ocorrencia esperada ocorreu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
+         //printf("#2 PASSED [GAL]: Ocorrencia esperada ocorreu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
       } else {
          printf("#2 FAILED [GAL]: Ocorrencia esperada não aconteceu (Esperado %d)->(Encontrado %d)\n", exp_pos, fnd_pos);
          printf("\n ### Finalizado [COM ERRO] Teste ID: %d Com Array List ### \n",t->testId);
@@ -211,16 +222,17 @@ double gal_testrunner(ptc_t t) {
    }
 
    printf("\n ### [SUCESSO-GAL] Finalizado Teste ID: %d Com Array List ### \n",t->testId);
-   tof = (double) stop - start;
-   return tof;
+   tof = (double) (stop - start) / CLOCKS_PER_SEC;
+   return tof/REPETITIONS;
 }
 
 
 void runtest(ptestcontainer_t t) {
    double totalTof = 0;
    pllnode_t curr_test_node = t->arrTests.head;
-
+   int testNumber = 1;
    while(curr_test_node) {
+      printf("Rodando Teste #%d\n", testNumber++);
 
       ptc_t curr_test = (ptc_t) curr_test_node->data;
 
@@ -229,13 +241,16 @@ void runtest(ptestcontainer_t t) {
       if (current_test_tof > 0) {
          totalTof += current_test_tof;
          t->passedTests++;
+      } else {
+         printf("Falha no teste %d - Tof Devolvido: %.8f\n", testNumber-1, current_test_tof);
+         print_tc(curr_test);
       }
 
       curr_test_node = curr_test_node->next;
    }
 
-   t->timeOfFlight =(double) totalTof / CLOCKS_PER_SEC;
-   t->meanTimeOfFlight = ( (double) totalTof/CLOCKS_PER_SEC) /(double) t->arrTests.element_count;
+   t->timeOfFlight = totalTof;
+   t->meanTimeOfFlight = totalTof /(double) t->arrTests.element_count;
 }
 
 void print_tc(ptc_t tc) {

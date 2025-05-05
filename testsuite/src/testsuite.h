@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
-#include "../../include/libgal.h"
-#include "../../include/libgll.h"
+#include "../../dependencies/include/libgal.h"
+#include "../../dependencies/include/libgll.h"
 
 // notação húngara era o mais conveniente pra usar aqui.
 typedef struct __intf__Blob {

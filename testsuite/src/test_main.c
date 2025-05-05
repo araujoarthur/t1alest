@@ -23,7 +23,7 @@ int main() {
    testcontainer_t tests = initTestContainer();
    finalResult result;
 
-   result.totalTests = addAllTests(&tests, "../../testcases/");
+   result.totalTests = addAllTests(&tests, "./testcases/");
    tests.rt = gal_testrunner;
    runtest(&tests); // 
    result.galPassed = tests.passedTests;
@@ -65,7 +65,7 @@ int addAllTests(ptestcontainer_t tc, const char* testFolderPath) {
             continue;
 
       if (cmpextension(entry->d_name, ".tc")) {
-         printf("Adding Test %s...\n", entry->d_name);
+         //printf("Adding Test %s...\n", entry->d_name);
 
          char* relPath = calloc(PATH_MAX, sizeof(char));
          strcpy(relPath, testFolderPath);

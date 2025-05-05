@@ -1,6 +1,12 @@
-project ('Trabalho1Alest', 'c', default_options: ['c_std=gnu2x'])
+project('full_project', 'c')
 
-# Subprojetos
-subdir('libdbll')
+# Define paths
+deps_include = 'dependencies/include'
+deps_lib = 'dependencies/lib'
+bin_dir = 'bin'
+testcases_dir = 'bin/testcases'
+
+# Create subdirectories
 subdir('gallib')
+subdir('libdbll')
 subdir('testsuite')
