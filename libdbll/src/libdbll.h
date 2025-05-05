@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #define BLOB const void*
+#define RAW_MEMORY_OFFSET char*
 
 // O element size poderia ser POR node, ai além de genérica ela seria um container que suporta, simultaneamente, varios tipos
 typedef struct GenericDBLLNode {

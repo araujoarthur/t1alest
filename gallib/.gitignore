@@ -2,3 +2,4 @@
 .vscode/
 builddir/
 build/
+**/env/

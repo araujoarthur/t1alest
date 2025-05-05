@@ -366,9 +366,14 @@ int gll_identify_sequence_match(pcllnode_t starting_node, pgll_t target) {
 
    while(current_target_node) {
       if (!current_searched_node) return 0;
+      RAW_MEMORY_OFFSET target_data = (RAW_MEMORY_OFFSET)current_target_node->data;
+      RAW_MEMORY_OFFSET src_data = (RAW_MEMORY_OFFSET) current_searched_node->data;
 
-      if (memcmp(current_target_node->data, current_searched_node->data, target->element_size) != 0) {
-         return 0;
+      size_t byte_count = target->element_size;
+      for (size_t i = 0; i < byte_count; i++) {
+         if (target_data[i] != src_data[i]) {
+            return 0;
+         }
       }
       current_target_node = current_target_node->next;
       current_searched_node = current_searched_node->next;

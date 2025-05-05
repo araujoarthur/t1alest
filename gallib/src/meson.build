@@ -1,1 +1,0 @@
-gal_lib = static_library('gal', ['gal.c'], include_directories: include_directories('.'))
