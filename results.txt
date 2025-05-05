@@ -1,0 +1,68 @@
+5
+Total Tests: 25
+
+----Generic Array List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000197
+       Total Time of Flight: 0,00004916
+
+----Generic Double Linked List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000217
+       Total Time of Flight: 0,00005429
+
+4 ## Final Result ##
+
+Total Tests: 25
+
+----Generic Array List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000194
+       Total Time of Flight: 0,00004856
+
+----Generic Double Linked List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000218
+       Total Time of Flight: 0,00005455
+
+3 ## Final Result ##
+
+Total Tests: 25
+
+----Generic Array List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000195
+       Total Time of Flight: 0,00004870
+
+----Generic Double Linked List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000218
+       Total Time of Flight: 0,00005445
+
+2 ## Final Result ##
+
+Total Tests: 25
+
+----Generic Array List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000195
+       Total Time of Flight: 0,00004880
+
+----Generic Double Linked List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000212
+       Total Time of Flight: 0,00005311
+
+1 ## Final Result ##
+
+Total Tests: 25
+
+----Generic Array List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000195
+       Total Time of Flight: 0,00004883
+
+----Generic Double Linked List:
+       Passed Tests: 25 (100,00%)
+       Mean Time of Flight: 0,00000216
+       Total Time of Flight: 0,00005411
