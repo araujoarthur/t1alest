@@ -1,0 +1,1 @@
+gal_lib = static_library('gll', ['libdbll.c'], include_directories: include_directories('.'))
