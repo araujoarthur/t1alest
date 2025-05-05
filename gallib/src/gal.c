@@ -237,8 +237,8 @@ pgal_t __gal_expand(pgal_t gal) {
 int __gal_elementwise_cmp(void* set, void* subset, int subset_count, size_t element_size) {
     for (int i = 0; i < subset_count; i++){
         
-        void* current_on_set = ((RAW_MEMORY_OFFSET)set + i * element_size);
-        void* current_on_subset =  ((RAW_MEMORY_OFFSET)subset + i * element_size);
+        void* current_on_set = (void*) ((RAW_MEMORY_OFFSET)set + i * element_size);
+        void* current_on_subset =  (void*) ((RAW_MEMORY_OFFSET)subset + i * element_size);
         
        // printf("Current on Set: %c | Current on Subset: %c | i: %d | Cmp Result: %d \n", *((char*)current_on_set), *((char*)current_on_subset), i, memcmp(current_on_set, current_on_subset, element_size));
         if (memcmp(current_on_set, current_on_subset, element_size) != 0) {
